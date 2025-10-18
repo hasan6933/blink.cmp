@@ -23,25 +23,25 @@ function source:enabled() return vim.g.loaded_vsnip == 1 end
 
 function source:get_completions(ctx, callback)
   local items = vim
-    .iter(vim.fn['vsnip#get_complete_items'](ctx.bufnr))
-    :map(
+      .iter(vim.fn['vsnip#get_complete_items'](ctx.bufnr))
+      :map(
       --- @param vsnip vsnip.CompleteItem
       --- @return lsp.CompletionItem?
-      function(vsnip)
-        local user_data = vim.fn.json_decode(vsnip.user_data)
-        return {
-          kind = require('blink.cmp.types').CompletionItemKind.Snippet,
-          label = vsnip.abbr,
-          insertText = vsnip.word,
-          insertTextFormat = vim.lsp.protocol.InsertTextFormat.Snippet,
-          data = {
-            snippet = user_data.vsnip.snippet,
-          },
-        }
-      end
-    )
-    :filter(function(item) return item ~= nil end)
-    :totable()
+        function(vsnip)
+          local user_data = vim.fn.json_decode(vsnip.user_data)
+          return {
+            kind = require('blink.cmp.types').CompletionItemKind.Snippet,
+            label = vsnip.abbr,
+            insertText = vsnip.word,
+            insertTextFormat = vim.lsp.protocol.InsertTextFormat.Snippet,
+            data = {
+              snippet = user_data.vsnip.snippet,
+            },
+          }
+        end
+      )
+      :filter(function(item) return item ~= nil end)
+      :totable()
 
   callback({
     is_incomplete_forward = false,
