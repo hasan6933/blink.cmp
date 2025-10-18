@@ -398,17 +398,17 @@ function win:get_direction_with_window_constraints(anchor_win, direction_priorit
     },
     s = {
       vertical = anchor_is_above_cursor and cursor_constraints.distance_from_bottom
-        or (screen_height - (anchor_height + anchor_row - 1 + anchor_border_size.vertical)),
+          or (screen_height - (anchor_height + anchor_row - 1 + anchor_border_size.vertical)),
       horizontal = screen_width - (anchor_col - 1),
     },
     e = {
       vertical = anchor_is_above_cursor and cursor_constraints.distance_from_top
-        or cursor_constraints.distance_from_bottom,
+          or cursor_constraints.distance_from_bottom,
       horizontal = screen_width - (anchor_col - 1) - anchor_width - anchor_border_size.right,
     },
     w = {
       vertical = anchor_is_above_cursor and cursor_constraints.distance_from_top
-        or cursor_constraints.distance_from_bottom,
+          or cursor_constraints.distance_from_bottom,
       horizontal = anchor_col - 1 + anchor_border_size.left,
     },
   }
@@ -420,9 +420,9 @@ function win:get_direction_with_window_constraints(anchor_win, direction_priorit
     local constraints_b = direction_constraints[b]
 
     local is_desired_a = desired_min_size.height <= constraints_a.vertical
-      and desired_min_size.width <= constraints_a.horizontal
+        and desired_min_size.width <= constraints_a.horizontal
     local is_desired_b = desired_min_size.height <= constraints_b.vertical
-      and desired_min_size.width <= constraints_b.horizontal
+        and desired_min_size.width <= constraints_b.horizontal
 
     -- If both have desired size, preserve original priority
     if is_desired_a and is_desired_b then return 0 end
